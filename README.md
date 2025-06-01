@@ -11,6 +11,10 @@ By the end of this guide, you will have an inference API with the following feat
 - Load balancing across multiple running instances of your service.
 - Secure internet access without direct exposure of your inference servers to the internet.
 
+Prerequisites:
+- A GitHub account.
+- Python 3.x installed on your machine, along with pip.
+
 ## Setting up your service
 1. Go to the [Infraence studio](https://studio.infraence.com/).
 
@@ -94,6 +98,26 @@ Then you should see something like this in your terminal:
 8. Infraence requests are formed depending on the API definition you declared in your inference script. The only requirement is to provide an `API-Key` header containing a valid API key for the requested service, like the one created in step 7. Here is an example that sends an audio `audio.mp3` located in your current directory to your API:
 > Note: Remember to replace your API key where indicated
 
+Powershell:
+```powershell
+$here = Get-Location
+Set-Location -Path $here
+
+$path = Join-Path $here "audio.mp3"
+$b64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($path))
+
+$payload = "{`"audio`":`"$b64`"}"
+$payload | Set-Content "body.json" -Encoding UTF8
+
+curl.exe -X POST https://gateway.infraence.com/hello-world `
+  -H "Content-Type: application/json" `
+  -H "API-Key: ===REPLACE YOUR API KEY HERE===" `
+  "--data" "@body.json"
+
+Remove-Item "body.json"
+```
+
+macOS:
 ```bash
 curl -X POST https://gateway.infraence.com/hello-world \
   -H "Content-Type: application/json" \
@@ -110,4 +134,4 @@ Your service is now accessible from anywhere on the internet.
 If you run another instance of your Python script and send additional requests,  Infraence will automatically balance them across all active instances.
 
 ## What's Next?
-Your inference API is now production-ready. All the core features authentication, validation, secure access, and load balancing are built-in and handled by Infraence. To start serving real users, you just need to deploy your inference script to a server or cloud environment (like AWS, GCP, or Azure). Once running, it will seamlessly connect to Infraence and begin handling requests from anywhere in the world.
+Your inference API is now production-ready. All the core features like authentication, validation, secure access, and load balancing are built-in and handled by Infraence. To start serving your users, you just need to deploy your inference script to your servers, a cloud environment, or both at the same time. Once running, it will seamlessly connect to Infraence and begin handling requests from anywhere in the world.
