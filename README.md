@@ -71,7 +71,13 @@ In the `request_body` field, you can define all the fields you want the users to
 > Note: The audio must be sent by the user as a base64-encoded string,  
 but your script will receive it as a decoded MP3 file on disk.
 
-6. Now you can run your script, you should see something like this in your terminal:
+6. Now you can run your script:
+```bash
+Python3 yourfilename.py
+```
+> Note: This command may vary depending on your python installation.
+
+Then you should see something like this in your terminal:
 
 ```bash
 ✅ Endpoint registered successfully
