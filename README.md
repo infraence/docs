@@ -15,6 +15,8 @@ Prerequisites:
 - A GitHub account.
 - Python 3.x installed on your machine, along with pip.
 
+Estimated time: 10 to 15 minutes
+
 ## Setting up your service
 1. Go to the [Infraence studio](https://studio.infraence.com/).
 
@@ -107,7 +109,7 @@ $path = Join-Path $here "audio.mp3"
 $b64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($path))
 
 $payload = "{`"audio`":`"$b64`"}"
-$payload | Set-Content "body.json" -Encoding UTF8
+$payload | Set-Content "body.json"
 
 curl.exe -X POST https://gateway.infraence.com/hello-world `
   -H "Content-Type: application/json" `
