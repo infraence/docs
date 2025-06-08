@@ -1,5 +1,8 @@
 # Getting started
 
+> [!WARNING]
+> Infraence is currently in closed beta. If you'd like early access, you can request an invitation on the [landing page](https://infraence.com).
+
 In this guide, you'll set up and run an inference API using Infraence. This example focuses on receiving MP3 audio files, running inference on them, and returning responses synchronously. 
 
 By the end of this guide, you will have an inference API with the following features:
@@ -10,17 +13,18 @@ By the end of this guide, you will have an inference API with the following feat
 - Decode the data received from API users.
 - Load balancing across multiple running instances of your service.
 - Secure internet access without direct exposure of your inference servers to the internet.
+- Automatic HTTPS setup and certificate management.
 
 Prerequisites:
 - A GitHub account.
 - Python 3.x installed on your machine, along with pip.
 
-Estimated time: 10 to 15 minutes
+Estimated time: 10 to 15 minutes.
 
 ## Setting up your service
 1. Go to the [Infraence studio](https://studio.infraence.com/).
 
-2. Create your new service (eg: audio_classification). A service encapsulates multiple endpoints.
+2. Create your new service (eg: audio_classification). A service encapsulates multiple endpoints, API keys and worker credentials.
 
 3. After creating your service, go to the "Connect" section, where you can manage your worker credentials. These credentials will be used by your Python script to connect to Infraence and receive inference requests. Make sure to keep these credentials secure, since they provide access to modifying and creating new endpoints. You can keep the credentials modal open for now, since you will need the connection string in the next steps.
 
@@ -29,11 +33,17 @@ Estimated time: 10 to 15 minutes
 ```bash
 pip install -i https://test.pypi.org/simple/ infraence==0.1.3a0
 ```
-> Note: You can install the infraence SDK in a Python virtual environment, though this will not be covered in this guide.
+> [!NOTE]
+> You can install the infraence SDK in a Python virtual environment, though this will not be covered in this guide.
 
-5. The infraence SDK allows you to define your model's API by declaring what you want to receive:
+5. The infraence SDK allows you to define your model's API by declaring what you want to receive. In this example, we'll create an endpoint for your inference service, which will look like this:
 
-> Note: Here you will need the connection string created in step 3.
+```nginx 
+POST https://gateway.infraence.com/hello-world
+```
+
+> [!IMPORTANT]
+> Here you will need the connection string created in step 3.
 
 ```python
 from infraence import Infraence
@@ -74,14 +84,16 @@ infraence.run()
 
 In the `request_body` field, you can define all the fields you want the users to send to your inference API. In the example above, users must provide a body field named "audio", that contains a base64 encoded MP3 file with a maximum size of 1.5 megabytes.
 
-> Note: The audio must be sent by the user as a base64-encoded string,  
-but your script will receive it as a decoded MP3 file on disk.
+> [!IMPORTANT]
+> The audio must be sent by the user as a base64-encoded string,  
+but your script will receive it as a decoded MP3 file on disk. Infraence will take care of validation and decoding.
 
 6. Now you can run your script:
 ```bash
 Python3 yourfilename.py
 ```
-> Note: This command may vary depending on your python installation.
+> [!NOTE]
+> This command may vary depending on your python installation.
 
 Then you should see something like this in your terminal:
 
@@ -95,7 +107,8 @@ Then you should see something like this in your terminal:
 ## Testing your API
 7. To test your API, first you must create an API Key. API Keys provide access to your inference services. To issue an API Key, go to the "API Key manager" section of the Infraence studio, there you can create a new key. Just like connection strings, API Keys are sensitive information and you should keep them secure.
 
-> ⚠️ Important: For security reasons, Infraence does not store or display API keys after creation, so if you lose a key you will have to issue a new one.
+> [!CAUTION]
+> For security reasons, Infraence does not store or display API keys after creation, so if you lose a key you will have to issue a new one.
 
 8. Infraence requests are formed depending on the API definition you declared in your inference script. The only requirement is to provide an `API-Key` header containing a valid API key for the requested service, like the one created in step 7. Here is an example that sends an audio `audio.mp3` located in your current directory to your API:
 > Note: Remember to replace your API key where indicated
