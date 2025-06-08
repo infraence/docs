@@ -111,7 +111,9 @@ Then you should see something like this in your terminal:
 > For security reasons, Infraence does not store or display API keys after creation, so if you lose a key you will have to issue a new one.
 
 8. Infraence requests are formed depending on the API definition you declared in your inference script. The only requirement is to provide an `API-Key` header containing a valid API key for the requested service, like the one created in step 7. Here is an example that sends an audio `audio.mp3` located in your current directory to your API:
-> Note: Remember to replace your API key where indicated
+
+> [!IMPORTANT]
+> Remember to replace your API key where indicated
 
 Powershell:
 ```powershell
