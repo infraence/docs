@@ -68,8 +68,8 @@ infraence = Infraence(
 )
 def handle_request(payload: Any):
     # Here you can run your predictions. 
-	# For audio fields, you will receive a local file path
-	# at payload["audio"], pointing to the decoded MP3 file.    
+	# For audio fields, you will receive a "bytes" object
+	# at payload["audio"].
 	# Whatever you return from this function will be sent 
     # as the response body.
     # Keep in mind that this function will be called in every request,
@@ -85,8 +85,8 @@ infraence.run()
 In the `request_body` field, you can define all the fields you want the users to send to your inference API. In the example above, users must provide a body field named "audio", that contains a base64 encoded MP3 file with a maximum size of 1.5 megabytes.
 
 > [!IMPORTANT]
-> The audio must be sent by the user as a base64-encoded string,  
-but your script will receive it as a decoded MP3 file on disk. Infraence will take care of validation and decoding.
+> The audio must be sent by the user as a base64-encoded string or as an URL that points to an MP3,  
+but your script will receive it as a bytes object containing the file. Infraence will take care of validation and decoding.
 
 6. Now you can run your script:
 ```bash
