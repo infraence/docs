@@ -31,7 +31,7 @@ Estimated time: 10 to 15 minutes.
 ## Setting up your Python project
 4. To connect to Infraence from your Python script, you must install the Infraence SDK. It can be installed with pip by using the following command:
 ```bash
-pip install -i https://test.pypi.org/simple/ infraence==0.1.3a0
+pip install -i https://test.pypi.org/simple/ infraence==0.1.4a0
 ```
 > [!NOTE]
 > You can install the infraence SDK in a Python virtual environment, though this will not be covered in this guide.
