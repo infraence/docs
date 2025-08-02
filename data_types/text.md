@@ -22,5 +22,5 @@ The "text" data type allows receiving a string as the value for a specified fiel
     },
 )
 def handle_request(payload: Any):
-		return payload.get("example-text")
+	return payload.get("example-text")
 ```
