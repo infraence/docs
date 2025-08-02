@@ -1,7 +1,5 @@
 # Text data type
 
----
-
 ## Description
 
 The "text" data type allows receiving a string as the value for a specified field.
