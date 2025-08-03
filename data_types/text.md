@@ -1,12 +1,18 @@
-# Text data type
+# Text data type - "text"
 
-The "text" data type allows receiving a string as the value for a specified field.
+Allows receiving a string as the value for a specified field.
 
 ## Supported constraints
 
-| Name       | Description                                | Value |
-| ---------- | ------------------------------------------ | ----- |
-| max_length | Maximum allowed length for the field value | int   |
+| Name       | Description                                | Value   |
+| ---------- | ------------------------------------------ | ------- |
+| max_length | Maximum allowed length for the field value | int > 0 |
+
+## Supported sources
+
+| Source | Description                                  |
+| ------ | -------------------------------------------- |
+| Inline | Content received as-is from the request body |
 
 ## Example
 
@@ -22,5 +28,5 @@ The "text" data type allows receiving a string as the value for a specified fiel
     },
 )
 def handle_request(payload: Any):
-	return payload.get("example-text")
+	return payload.get("example-text") # Returns a string or None since the field is optional
 ```
