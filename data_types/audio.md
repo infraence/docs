@@ -4,10 +4,13 @@ Allows to receive a bytes object containing an audio provided by the API user.
 
 ## Supported constraints
 
-| Name           | Description                                                               | Value     |
-| -------------- | ------------------------------------------------------------------------- | --------- |
-| allowed_format | audio format the user must provided                                       | "mp3"     |
-| max_size_mb    | maximum size of the provided audio file in megabytes (decimal definition) | float > 0 |
+| Name           | Description                                                               | Value     | Required |
+| -------------- | ------------------------------------------------------------------------- | --------- | -------- |
+| allowed_format | audio format the user must provided                                       | "mp3"     | Yes      |
+| max_size_mb    | maximum size of the provided audio file in megabytes (decimal definition) | float > 0 | Yes      |
+
+> [!WARNING]
+> Choose the "max_size_mb" value carefully. Setting it too high may cause excessive RAM use and increased bandwidth consumption.
 
 ## Supported sources
 

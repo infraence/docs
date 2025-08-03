@@ -4,9 +4,9 @@ Allows receiving a string as the value for a specified field.
 
 ## Supported constraints
 
-| Name       | Description                                | Value   |
-| ---------- | ------------------------------------------ | ------- |
-| max_length | Maximum allowed length for the field value | int > 0 |
+| Name       | Description                                | Value   | Required |
+| ---------- | ------------------------------------------ | ------- | -------- |
+| max_length | Maximum allowed length for the field value | int > 0 | No       |
 
 ## Supported sources
 
